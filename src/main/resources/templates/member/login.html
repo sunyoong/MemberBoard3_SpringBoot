@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<form action="/member/login" method="post">
+    <input type="text" name="memberEmail">
+  <!--  <p th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}" th:errorclass="field-error"></p>-->
+    <input type="text" name="memberPassword">
+   <!-- <p th:if="${#fields.hasErrors('memberPassword')}" th:errors="*{memberPassword}" th:errorclass="field-error"></p>-->
+<input type="submit" value="로그인">
+
+</form>
+</body>
+</html>

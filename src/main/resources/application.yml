@@ -1,0 +1,30 @@
+server:
+  port: 8092
+
+# DB 접속 정보
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springbootclass?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: bootuser
+    password: 1234
+  timeleaf:
+    cache: false
+
+
+  # JPA 관련 설정(스프링에 속해있는것// 첫줄에서 탭키 한번 하고 시작해야함!)
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      # ddl : creat, alter, drop
+      # dml : insert, select, update, delete
+
+
+# mybatis 관련 설정
+mybatis:
+  # resources/mapper/에 있는 모든 xml파일
+  mapper-locations: mapper/*.xml
+  # alias 설정
+#  type-aliases-package: com.icia.member.dto

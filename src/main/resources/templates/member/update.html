@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+        const memberUpdate = () => {
+            console.log('수정함수 호출');
+/*            var formData = $("#update_form").serialize();
+            console.log(formData);*/
+
+            // DOM API를 이용하여 memberId, 이메일, 비번, 이름을 가져와서 각각 javascript 함수에 담으시오
+            // DOM API: 자바스크립트에서 html을 제어할 수 있는,,
+           const id = document.getElementById('memberId').value;
+           const email = document.querySelector('#memberEmail').value;
+           const password = $('#memberPassword').val();
+           const name = $('#memberName').val();
+           /*const name = '[[${member.memberName}]]'; 이런 방법도 있지만, 여기서는 이름을 수정가능하도록 할거기 때문에 이걸로 하면 안됨 */
+           console.log(id, email, password, name);
+
+           // javascript object에 담아서 ajax로 컨트롤러에 보냄.
+            const updateData = JSON.stringify({
+                memberId: id,
+                memberEmail: email,
+                memberPassword: password,
+                memberName: name
+            })
+            console.log(updateData);
+            const reqUrl = "/member/"+ id;
+            $.ajax({
+                type:'put', //put(모든데이터), patch(수정이 필요한 것만 바뀜)
+                data: updateData,
+                url : reqUrl,
+                contentType:  'application/json',// json으로 보낼때는 꼭 써야함.
+                success: function(){
+                    location.href ="/member/"+ id;
+                },
+                error: function(){
+                    alert('ajax 실패');
+                }
+
+
+
+            })
+
+
+
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+<h2>update.html</h2>
+<form action="/member/update" method="post" id="update_form">
+    <input type="hidden" name="memberId" id="memberId"th:value="${member.memberId}">
+아이디 :    <input type="text" name="memberEmail" id="memberEmail" th:value="${member.memberEmail}" readonly>
+비밀번호 :   <input type="text" name="memberPassword" id="memberPassword"th:value="${member.memberPassword}" readonly>
+이름 :    <input type="text" name="memberName" id="memberName" th:value="${member.memberName}">
+    <input type="submit" value="수정">
+    <input type="button" value="수정(put)" th:onclick="memberUpdate()">
+</form>
+
+</body>
+</html>
